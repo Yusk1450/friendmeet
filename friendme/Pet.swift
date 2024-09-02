@@ -46,8 +46,8 @@ class Pet: NSObject
 	var birthDate = Date()
 	var lastFeedDate:Date?
 	var isDead = false
-	var achivements = [Achievement]()
-	
+	var achivements = [AchievementData]()
+		
 	class func getCharaImage(charaType:CharaType, imageType:CharaImageType = .Normal) -> UIImage?
 	{
 		if (charaType == .Cat)

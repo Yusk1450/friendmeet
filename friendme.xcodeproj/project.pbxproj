@@ -33,6 +33,8 @@
 		D6314B282C50244C00B00273 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6314B272C50244C00B00273 /* Animator.swift */; };
 		D6314B2A2C50461700B00273 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6314B292C50461700B00273 /* PetDetailViewController.swift */; };
 		D6314B2C2C5049D900B00273 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6314B2B2C5049D900B00273 /* MemoryViewController.swift */; };
+		D65C766E2C8215B100CFFCFB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65C766D2C8215B100CFFCFB /* CoreLocation.framework */; };
+		D65C76702C82E49A00CFFCFB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C766F2C82E49A00CFFCFB /* MapViewController.swift */; };
 		D69635702C575F0D00E1AA52 /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696356F2C575F0D00E1AA52 /* AchievementViewController.swift */; };
 		D6A7063B2C5079D600B5D5D9 /* CamCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A7063A2C5079D600B5D5D9 /* CamCapture.swift */; };
 		D6B317722C57AB2F00F3C39B /* DeadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B317712C57AB2F00F3C39B /* DeadViewController.swift */; };
@@ -86,6 +88,8 @@
 		D6314B272C50244C00B00273 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		D6314B292C50461700B00273 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailViewController.swift; sourceTree = "<group>"; };
 		D6314B2B2C5049D900B00273 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
+		D65C766D2C8215B100CFFCFB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D65C766F2C82E49A00CFFCFB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D696356F2C575F0D00E1AA52 /* AchievementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewController.swift; sourceTree = "<group>"; };
 		D6A7063A2C5079D600B5D5D9 /* CamCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamCapture.swift; sourceTree = "<group>"; };
 		D6B317712C57AB2F00F3C39B /* DeadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D65C766E2C8215B100CFFCFB /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +128,7 @@
 				CEDDD6712C4C03360026E9FC /* friendmeTests */,
 				CEDDD67B2C4C03360026E9FC /* friendmeUITests */,
 				CEDDD6592C4C03340026E9FC /* Products */,
+				D65C766C2C8215B100CFFCFB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +192,7 @@
 				D6314B2B2C5049D900B00273 /* MemoryViewController.swift */,
 				D696356F2C575F0D00E1AA52 /* AchievementViewController.swift */,
 				D6B317712C57AB2F00F3C39B /* DeadViewController.swift */,
+				D65C766F2C82E49A00CFFCFB /* MapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -209,6 +216,14 @@
 				D6314B1F2C5011F200B00273 /* UIColorEx.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D65C766C2C8215B100CFFCFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D65C766D2C8215B100CFFCFB /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +367,7 @@
 				D6314B242C50213100B00273 /* PetFinishViewController.swift in Sources */,
 				D6314B282C50244C00B00273 /* Animator.swift in Sources */,
 				CEDDD65C2C4C03340026E9FC /* AppDelegate.swift in Sources */,
+				D65C76702C82E49A00CFFCFB /* MapViewController.swift in Sources */,
 				D6314B1B2C500F1500B00273 /* AlertView.swift in Sources */,
 				CEDDD6922C4D77EB0026E9FC /* FontController.swift in Sources */,
 				D69635702C575F0D00E1AA52 /* AchievementViewController.swift in Sources */,
@@ -550,6 +566,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = friendme/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "QRコードを読み取るのにカメラを使用します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得したいので";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -580,6 +597,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = friendme/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "QRコードを読み取るのにカメラを使用します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得したいので";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

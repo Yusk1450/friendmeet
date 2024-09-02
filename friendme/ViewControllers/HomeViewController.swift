@@ -105,7 +105,10 @@ class HomeViewController: UIViewController
 			if let petIdx = ShareData.shared.pets.firstIndex(of: petData)
 			{
 				ShareData.shared.pets[petIdx].isDead = true
-				ShareData.shared.pets[petIdx].achivements.append(.Dead)
+				if let location = ShareData.shared.location
+				{
+					ShareData.shared.pets[petIdx].achivements.append(AchievementData(achievement: .Dead, location: location.coordinate))
+				}
 				ShareData.shared.savePets()
 			}
 			petView.removeFromSuperview()

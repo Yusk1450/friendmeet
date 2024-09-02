@@ -34,21 +34,28 @@ class PetFinishViewController: UIViewController
 			self.destLbl.text = "\(petName)を大事にしてね！"
 		}
 		
+		let shared = ShareData.shared
+		
 		let pet = Pet()
 		pet.name = self.petName
 		pet.charaType = self.charaType
 		pet.friendName = self.friendName
 		pet.lastFeedDate = Date()
-		pet.achivements.append(.Meeting)
-		pet.achivements.append(.OneMonth)
-		pet.achivements.append(.ThreeMonth)
-		pet.achivements.append(.SixMonth)
-		pet.achivements.append(.OneYear)
-		pet.achivements.append(.Feed1)
-		pet.achivements.append(.Feed2)
-		pet.achivements.append(.Feed3)
-		pet.achivements.append(.Feed4)
-		pet.achivements.append(.Feed5)
+		
+		if let location = shared.location
+		{
+			pet.achivements.append(AchievementData(achievement: .Meeting, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .OneMonth, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .ThreeMonth, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .SixMonth, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .OneYear, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .Feed1, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .Feed2, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .Feed3, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .Feed4, location: location.coordinate))
+			pet.achivements.append(AchievementData(achievement: .Feed5, location: location.coordinate))
+		}
+		
 		ShareData.shared.pets.append(pet)
 		ShareData.shared.savePets()
     }

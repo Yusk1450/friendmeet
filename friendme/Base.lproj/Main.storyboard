@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1485,11 +1486,47 @@ Cg
                     <connections>
                         <outlet property="titleLbl" destination="OpC-Hc-iO4" id="Yej-iC-7at"/>
                         <segue destination="kd1-O4-3pn" kind="presentation" identifier="toCreate" id="uCc-F9-iEO"/>
+                        <segue destination="TNN-Kp-tNk" kind="presentation" identifier="toMap" id="fQN-X4-myT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zp6-IU-29o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1448.0916030534352" y="1485.9154929577467"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="183-W3-shy">
+            <objects>
+                <viewController id="TNN-Kp-tNk" customClass="MapViewController" customModule="friendme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2pr-4s-YPQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsScale="YES" showsUserTrackingButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yht-vD-jcq">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3By-wM-ZPS" customClass="BacktoGroundButton" customModule="friendme" customModuleProvider="target">
+                                <rect key="frame" x="96" y="678" width="200" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="Csgreen"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="庭に戻る"/>
+                                <connections>
+                                    <action selector="backBtnAction:" destination="TNN-Kp-tNk" eventType="touchUpInside" id="mab-yO-qya"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lx7-Kf-e32"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="yht-vD-jcq" id="ZDK-gk-rOX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JyO-IP-aRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2205.3435114503818" y="1485.9154929577467"/>
         </scene>
         <!--Dead View Controller-->
         <scene sceneID="YMk-xI-w0T">
@@ -1628,40 +1665,43 @@ Cg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DfU-0F-SSa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2172" y="1486"/>
+            <point key="canvasLocation" x="2231" y="737"/>
         </scene>
     </scenes>
     <designables>
+        <designable name="3By-wM-ZPS">
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
+        </designable>
         <designable name="9hd-6P-EPH">
             <size key="intrinsicContentSize" width="24" height="14"/>
         </designable>
         <designable name="Al1-LO-3qz">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="Cf1-HV-jYS">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="Rxh-u2-RzP">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="V3d-4l-t1g">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="bRV-d3-EOs">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="o2H-rw-Gig">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="sJe-5o-JRO">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
         <designable name="zHb-mE-Rcv">
-            <size key="intrinsicContentSize" width="24" height="14"/>
+            <size key="intrinsicContentSize" width="87.666666666666671" height="34.333333333333336"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="ATC-SO-nFf"/>
+        <segue reference="uCc-F9-iEO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Line" width="278" height="1"/>

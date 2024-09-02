@@ -10,7 +10,9 @@ import UIKit
 class AchievementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
 	var pet:Pet?
-	var items = [Achievement]()
+	var items = [AchievementData]()
+	
+	var selectedAchievementData:AchievementData?
 	
 	@IBOutlet weak var titleLbl: UILabel!
 	
@@ -65,49 +67,49 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 		textImgView.frame.origin.y = 12.0
 		bgImgView.image = nil
 		
-		if (self.items[indexPath.row] == .Meeting)
+		if (self.items[indexPath.row].achievement == .Meeting)
 		{
 			bgImgView.image = UIImage(named: "seal_backstar")
 			textImgView.image = UIImage(named: "seal_meet")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Frame)
 			textLbl.text = "「\(friendName)」との出会い"
 		}
-		else if (self.items[indexPath.row] == .OneMonth)
+		else if (self.items[indexPath.row].achievement == .OneMonth)
 		{
 			bgImgView.image = UIImage(named: "seal_backcircle")
 			textImgView.image = UIImage(named: "seal_1month")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Frame)
 			textLbl.text = "出会って、1ヶ月"
 		}
-		else if (self.items[indexPath.row] == .ThreeMonth)
+		else if (self.items[indexPath.row].achievement == .ThreeMonth)
 		{
 			bgImgView.image = UIImage(named: "seal_backcircle")
 			textImgView.image = UIImage(named: "seal_3month")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Frame)
 			textLbl.text = "出会って、3ヶ月"
 		}
-		else if (self.items[indexPath.row] == .SixMonth)
+		else if (self.items[indexPath.row].achievement == .SixMonth)
 		{
 			bgImgView.image = UIImage(named: "seal_backcircle")
 			textImgView.image = UIImage(named: "seal_6month")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Frame)
 			textLbl.text = "出会って、6ヶ月"
 		}
-		else if (self.items[indexPath.row] == .OneYear)
+		else if (self.items[indexPath.row].achievement == .OneYear)
 		{
 			bgImgView.image = UIImage(named: "seal_backstar")
 			textImgView.image = UIImage(named: "seal_1year")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Frame)
 			textLbl.text = "出会って、1年"
 		}
-		else if (self.items[indexPath.row] == .Dead)
+		else if (self.items[indexPath.row].achievement == .Dead)
 		{
 			bgImgView.image = UIImage(named: "seal_backdead")
 			textImgView.image = UIImage(named: "seal_dead")
 			petImgView.image = Pet.getCharaImage(charaType: petType, imageType: .Dead)
 			textLbl.text = "「\(friendName)」との別れ"
 		}
-		else if (self.items[indexPath.row] == .Feed1)
+		else if (self.items[indexPath.row].achievement == .Feed1)
 		{
 			bgImgView.image = UIImage(named: "seal_backesa")
 			textImgView.image = UIImage(named: "feed1")
@@ -116,7 +118,7 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 			textImgView.frame.origin.x -= 10.0
 			textImgView.frame.origin.y -= 1.0
 		}
-		else if (self.items[indexPath.row] == .Feed2)
+		else if (self.items[indexPath.row].achievement == .Feed2)
 		{
 			bgImgView.image = UIImage(named: "seal_backesa")
 			textImgView.image = UIImage(named: "feed2")
@@ -125,7 +127,7 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 			textImgView.frame.origin.x -= 10.0
 			textImgView.frame.origin.y -= 1.0
 		}
-		else if (self.items[indexPath.row] == .Feed3)
+		else if (self.items[indexPath.row].achievement == .Feed3)
 		{
 			bgImgView.image = UIImage(named: "seal_backesa")
 			textImgView.image = UIImage(named: "feed3")
@@ -134,7 +136,7 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 			textImgView.frame.origin.x -= 10.0
 			textImgView.frame.origin.y -= 1.0
 		}
-		else if (self.items[indexPath.row] == .Feed4)
+		else if (self.items[indexPath.row].achievement == .Feed4)
 		{
 			bgImgView.image = UIImage(named: "seal_backesa")
 			textImgView.image = UIImage(named: "feed4")
@@ -143,7 +145,7 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 			textImgView.frame.origin.x -= 10.0
 			textImgView.frame.origin.y -= 1.0
 		}
-		else if (self.items[indexPath.row] == .Feed5)
+		else if (self.items[indexPath.row].achievement == .Feed5)
 		{
 			bgImgView.image = UIImage(named: "seal_backesa")
 			textImgView.image = UIImage(named: "feed5")
@@ -158,7 +160,17 @@ class AchievementViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
+		self.selectedAchievementData = self.items[indexPath.row]
 		tableView.deselectRow(at: indexPath, animated: true)
+		self.performSegue(withIdentifier: "toMap", sender: nil)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+	{
+		if let nextViewController = segue.destination as? MapViewController
+		{
+			nextViewController.achievementCoordinate = self.selectedAchievementData?.location
+		}
 	}
 	
 	@IBAction func backBtnAction(_ sender: Any)

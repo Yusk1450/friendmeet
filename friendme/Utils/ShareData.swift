@@ -7,6 +7,34 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+
+class AchievementData: NSObject, NSCoding
+{
+	let achievement:Achievement
+	let location: CLLocationCoordinate2D
+	
+	init(achievement: Achievement, location: CLLocationCoordinate2D)
+	{
+		self.achievement = achievement
+		self.location = location
+	}
+	
+	func encode(with coder: NSCoder)
+	{
+		coder.encode(self.achievement.rawValue, forKey: "achievement")
+		coder.encode(self.location.latitude, forKey: "latitude")
+		coder.encode(self.location.longitude, forKey: "longitude")
+	}
+	
+	required init?(coder: NSCoder)
+	{
+		self.achievement = Achievement(rawValue: coder.decodeInteger(forKey: "achievement"))!
+		let latitude = coder.decodeDouble(forKey: "latitude")
+		let longitude = coder.decodeDouble(forKey: "longitude")
+		self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+	}
+}
 
 enum Achievement: Int
 {
@@ -39,8 +67,11 @@ enum UserDefaultKey: String
 	case pets
 }
 
-class ShareData: NSObject
+class ShareData: NSObject, CLLocationManagerDelegate
 {
+	let locationManager = CLLocationManager()
+	var location:CLLocation?
+	
     static let shared = ShareData()
 	var pets = [Pet]()
 
@@ -50,6 +81,37 @@ class ShareData: NSObject
 		
 		let ud = UserDefaults.standard
 		ud.register(defaults: [UserDefaultKey.isFirst.rawValue: true, UserDefaultKey.pets.rawValue: [Pet]()])
+		
+		// 位置情報サービスが使えるかどうか
+		if (CLLocationManager.locationServicesEnabled())
+		{
+			self.locationManager.delegate = self
+			self.locationManager.distanceFilter = kCLDistanceFilterNone
+			self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+	{
+		switch (status)
+		{
+			case .notDetermined:
+				self.locationManager.requestWhenInUseAuthorization()
+				
+			case .authorizedWhenInUse:
+				self.locationManager.startUpdatingLocation()
+				
+			default:
+				break
+		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+	{
+		if let location = locations.last
+		{
+			self.location = location
+		}
 	}
 	
 	var isFirst: Bool {
@@ -117,14 +179,11 @@ class ShareData: NSObject
 				pet.isDead = isDead
 			}
 			// シール
-			if let achivementRawValues = data["achivements"] as? [Int]
+			if let achivementData = data["achivements"] as? Data,
+			   let achivements = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(achivementData) as? [AchievementData]
 			{
-				for achivementRawValue in achivementRawValues
-				{
-					pet.achivements.append(Achievement(rawValue: achivementRawValue)!)
-				}
+				pet.achivements = achivements
 			}
-			
 			
 			pets.append(pet)
 		}
@@ -145,13 +204,11 @@ class ShareData: NSObject
 			petData["friendName"] = pet.friendName
 			petData["lastFeedDate"] = pet.lastFeedDate?.description
 			petData["isDead"] = pet.isDead
-			
-			var achivementRawValue = [Int]()
-			for achivement in pet.achivements
+
+			if let achivementArchive = try? NSKeyedArchiver.archivedData(withRootObject: pet.achivements, requiringSecureCoding: false)
 			{
-				achivementRawValue.append(achivement.rawValue)
+				petData["achivements"] = achivementArchive
 			}
-			petData["achivements"] = achivementRawValue
 			
 			data.append(petData)
 		}
